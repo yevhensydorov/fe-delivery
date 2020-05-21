@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { connect } from "react-redux";
+import Link from "next/link";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 function CartStatus(props) {
   return (
     <StyledCartStatus>
-      <ShoppingBasketIcon fontSize="small" />
-      <p>{props.totalCart} item</p>
+      <Link href="/cart" passHref>
+        <a>
+          <p>
+            <ShoppingBasketIcon fontSize="small" /> {props.totalCartQuantity}{" "}
+            item
+          </p>
+        </a>
+      </Link>
     </StyledCartStatus>
   );
 }
@@ -16,10 +23,8 @@ const StyledCartStatus = styled.div`
   align-items: center;
 `;
 
-const mapStateToProps = (state) => {
-  return {
-    totalCart: state.cart.total,
-  };
-};
+const mapStateToProps = (state) => ({
+  totalCartQuantity: state.cart.totalQuantity,
+});
 
 export default connect(mapStateToProps)(CartStatus);

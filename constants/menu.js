@@ -5,6 +5,7 @@ export const menu = [
     title: "Smoke burger",
     description: "Tasty smoke burger",
     price: 7,
+    quantity: 0,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const menu = [
     title: "Vegan burger",
     description: "Vegan green burger",
     price: 6,
+    quantity: 0,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const menu = [
     title: "Lobster roll",
     description: "Rolling Lobster ROll",
     price: 10,
+    quantity: 0,
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export const menu = [
     title: "Sushi",
     description: "Awful sushi",
     price: 8,
+    quantity: 0,
   },
   {
     id: 5,
@@ -33,5 +37,6 @@ export const menu = [
     title: "Cheescake",
     description: "Berry cheescake",
     price: 3,
+    quantity: 0,
   },
 ];

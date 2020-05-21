@@ -2,15 +2,13 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { addToBasket } from "../redux/actions";
 
-let CardItem = (props) => (
+let CardItem = ({ title, image, description, price, id, dispatch }) => (
   <StyledCardItem>
-    <h3>{props.title}</h3>
-    <img src={props.image} alt={props.description} />
-    <p>{props.description}</p>
-    <p>£{props.price}</p>
-    <button onClick={(e) => props.dispatch(addToBasket(props.id))}>
-      Add to Basket
-    </button>
+    <h3>{title}</h3>
+    <img src={image} alt={description} />
+    <p>{description}</p>
+    <p>£{price}</p>
+    <button onClick={(e) => dispatch(addToBasket(id))}>Add to Basket</button>
   </StyledCardItem>
 );
 
