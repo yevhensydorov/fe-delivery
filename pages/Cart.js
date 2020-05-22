@@ -1,22 +1,42 @@
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Layout from "../components/Layout";
+import CartItem from "../components/CartItem";
 
-const Cart = (props) => {
+const Cart = ({ cart }) => {
+  const { addedItems, totalPrice, totalQuantity } = cart;
+
+  const renderCartItems = (addedItems) => {
+    if (addedItems.length === 0 || !addedItems) {
+      return <p>There is no items added to the Cart</p>;
+    } else {
+      return addedItems.map((el) => {
+        return (
+          <CartItem
+            title={el.title}
+            description={el.description}
+            price={el.price}
+            quantity={el.quantity}
+            key={el.id}
+            id={el.id}
+          />
+        );
+      });
+    }
+  };
   return (
     <Layout>
-      <div>
-        <p>Title</p>
-        <p>Description</p>
-        <button>-</button>
-        <span>33</span>
-        <button>+</button>
-        <button>Delete</button>
-        <p>$300</p>
-      </div>
+      <StyledCartItemsWrapper>
+        {renderCartItems(addedItems)}
+      </StyledCartItemsWrapper>
     </Layout>
   );
 };
+
+const StyledCartItemsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const mapStateToProps = (state) => {
   return {

@@ -1,4 +1,4 @@
-import { ADD_ITEM_TO_BASKET } from "../actions";
+import { ADD_ITEM_TO_BASKET, REMOVE_ITEM_FROM_BASKET } from "../actions";
 
 import { menu } from "../../constants/menu";
 
@@ -9,9 +9,10 @@ const cartInitState = {
 };
 
 export function cartReducer(state = cartInitState, action) {
+  let newState;
+
   switch (action.type) {
     case ADD_ITEM_TO_BASKET:
-      let newState;
       let itemToAdd = menu.find((el) => el.id === action.id);
       let existedItem = state.addedItems.find((el) => el.id === action.id);
 
@@ -27,6 +28,27 @@ export function cartReducer(state = cartInitState, action) {
           addedItems: [...state.addedItems, itemToAdd],
           totalQuantity: (state.totalQuantity += 1),
           totalPrice: (state.totalPrice += itemToAdd.price),
+        });
+      }
+
+      return newState;
+    case REMOVE_ITEM_FROM_BASKET:
+      let itemToFind = state.addedItems.find((el) => el.id === action.id);
+
+      if (itemToFind.quantity > 1) {
+        itemToFind.quantity -= 1;
+        newState = Object.assign({}, state, {
+          totalQuantity: (state.totalQuantity -= 1),
+          totalPrice: (state.totalPrice -= itemToFind.price),
+        });
+      } else {
+        let filteredState = state.addedItems.filter(
+          (el) => el.id !== action.id
+        );
+        newState = Object.assign({}, state, {
+          addedItems: filteredState,
+          totalQuantity: (state.totalQuantity -= 1),
+          totalPrice: (state.totalPrice -= itemToFind.price),
         });
       }
 
