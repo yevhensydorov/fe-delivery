@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import CartItemQuantitySelector from "./CartItemQuantitySelector";
+import { removeFromBasket } from "../redux/actions";
+import { connect } from "react-redux";
 
-const CartItem = ({ title, description, price, quantity, id }) => {
+let CartItem = ({ title, description, price, quantity, id, dispatch }) => {
   return (
     <StyledCartItem>
       <p>{title}</p>
       <p>{description}</p>
       <CartItemQuantitySelector quantity={quantity} id={id} />
-      <button>Delete</button>
-      <p>£{price}</p>
+      <button onClick={(e) => dispatch(removeFromBasket(id))}>Delete</button>
+      <p>Price per item: £{price}</p>
     </StyledCartItem>
   );
 };
@@ -21,5 +23,7 @@ const StyledCartItem = styled.article`
   padding: 10px;
   margin-bottom: 10px;
 `;
+
+CartItem = connect()(CartItem);
 
 export default CartItem;

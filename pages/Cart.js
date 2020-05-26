@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 import { connect } from "react-redux";
 import Layout from "../components/Layout";
 import CartItem from "../components/CartItem";
@@ -24,11 +25,19 @@ const Cart = ({ cart }) => {
       });
     }
   };
+
   return (
     <Layout>
       <StyledCartItemsWrapper>
         {renderCartItems(addedItems)}
       </StyledCartItemsWrapper>
+      <p>Total: £{totalPrice}</p>
+      <Link href="/confirm" passHref>
+        <button>Order now</button>
+      </Link>
+      <Link href="/" passHref>
+        <button>Back to the menu</button>
+      </Link>
     </Layout>
   );
 };

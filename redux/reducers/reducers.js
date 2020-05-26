@@ -42,7 +42,7 @@ export function cartReducer(state = cartInitState, action) {
           totalPrice: (state.totalPrice -= itemToFind.price),
         });
       } else {
-        let filteredState = state.addedItems.filter(
+        const filteredState = state.addedItems.filter(
           (el) => el.id !== action.id
         );
         newState = Object.assign({}, state, {
